@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hth · 日常查询与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f1f2f5;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #2c2f33;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        /* hero 开场 */
+        .hero {
+            background: #ffffff;
+            border: 1px solid #dadce0;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+            padding: 3rem 2.5rem 2.8rem;
+            margin-bottom: 1.8rem;
+            transition: box-shadow 0.2s;
+        }
+        .hero:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+        .hero .tagline {
+            font-size: 1.9rem;
+            font-weight: 450;
+            letter-spacing: -0.02em;
+            color: #1e2124;
+            margin-bottom: 1.2rem;
+            line-height: 1.3;
+        }
+        .hero .tagline i {
+            font-style: normal;
+            background: #f0f2f5;
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            color: #3c4043;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #3c4043;
+            max-width: 650px;
+            margin-bottom: 1.5rem;
+        }
+        .hero .mild-link {
+            font-size: 0.95rem;
+        }
+        .hero .mild-link a {
+            color: #1a73e8;
+            text-decoration: none;
+            border-bottom: 1px dashed #b0b7c3;
+            font-weight: 450;
+            padding-bottom: 1px;
+            transition: border-color 0.15s, color 0.15s;
+        }
+        .hero .mild-link a:hover {
+            color: #0d47a1;
+            border-bottom: 1px solid #0d47a1;
+        }
+
+        /* 承接段落卡片 */
+        .card {
+            background: #ffffff;
+            border: 1px solid #dadce0;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            padding: 2rem 2.2rem;
+            margin-bottom: 1.6rem;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03), 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 480;
+            color: #1f2327;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+        .card p {
+            margin-bottom: 1rem;
+            color: #3c4043;
+        }
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 特点列表 —— 温和条目 */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0 0.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.98rem;
+            color: #2c3034;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid #eef0f2;
+            padding-bottom: 0.6rem;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list li::before {
+            content: "·";
+            display: inline-block;
+            font-weight: 500;
+            color: #7a808a;
+            font-size: 1.4rem;
+            line-height: 1;
+            margin-right: 0.1rem;
+            flex-shrink: 0;
+            width: 0.8rem;
+        }
+
+        /* 引用/提示块 */
+        .note {
+            background: #f6f8fa;
+            border-left: 3px solid #b6bcc6;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 0.95rem;
+            color: #3f4348;
+        }
+        .note strong {
+            font-weight: 500;
+            color: #1f2327;
+        }
+
+        /* FAQ 摘要（简洁） */
+        .faq-mini {
+            margin-top: 0.5rem;
+        }
+        .faq-mini details {
+            border-bottom: 1px solid #e2e5e9;
+            padding: 0.7rem 0;
+        }
+        .faq-mini details:last-child {
+            border-bottom: none;
+        }
+        .faq-mini summary {
+            font-weight: 470;
+            cursor: pointer;
+            color: #1f2327;
+            padding: 0.1rem 0;
+            font-size: 0.98rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-mini summary::before {
+            content: "▸";
+            display: inline-block;
+            margin-right: 0.6rem;
+            color: #7f858f;
+            transition: transform 0.2s;
+            font-size: 1rem;
+        }
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .faq-mini .answer {
+            padding: 0.6rem 0 0.2rem 1.8rem;
+            color: #3c4043;
+            font-size: 0.94rem;
+        }
+
+        /* 温和结尾 */
+        .gentle-footer {
+            text-align: center;
+            padding: 1.8rem 0.5rem 0.2rem;
+            font-size: 0.9rem;
+            color: #6e737b;
+            border-top: 1px solid #dfe1e5;
+            margin-top: 2rem;
+        }
+        .gentle-footer a {
+            color: #5f6369;
+            text-decoration: none;
+            border-bottom: 1px dotted #b8bcc4;
+        }
+        .gentle-footer a:hover {
+            color: #1a73e8;
+            border-bottom: 1px solid #1a73e8;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero {
+                padding: 2rem 1.5rem 2rem;
+            }
+            .hero .tagline {
+                font-size: 1.6rem;
+            }
+            .card {
+                padding: 1.6rem 1.2rem;
+            }
+            .card h2 {
+                font-size: 1.3rem;
+            }
+            .feature-list li {
+                font-size: 0.93rem;
+            }
+        }
+        @media (max-width: 440px) {
+            .hero .tagline {
+                font-size: 1.4rem;
+            }
+            .hero {
+                padding: 1.5rem 1rem;
+            }
+            .card {
+                padding: 1.2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 开场短句 hero -->
+    <div class="hero">
+        <div class="tagline">
+            偶尔需要一个起点，<br>从一次查询开始。
+        </div>
+        <p>
+            有些信息，不必刻意记住，但希望伸手就能找到。<br>
+            一个轻巧的对照、一段可延伸的阅读，或者只是确认某个名字——<br>
+            在书签栏之外，还有另一种方式。
+        </p>
+        <div class="mild-link">
+            比如，你可能会用到 <a href="https://get-hth.com">hth</a> 这个词来开启一次浏览。<br>
+            至于得到什么，往往取决于你带去的上下文。
+        </div>
+    </div>
+
+    <!-- 承接段落 —— 日常查询与延伸 -->
+    <div class="card">
+        <h2>从“查一下”到“读下去”</h2>
+        <p>
+            很多时候，我们打开一个页面只是为了快速确认某个术语、版本或编号。但有时，那个短查询会引出一段背景，让人不自觉地往下翻。与刻意搜索不同，这种延伸阅读更像散步——并不急着抵达哪里。 
+        </p>
+        <p>
+            一个稳定的地址，就是散步的起点。<a href="https://get-hth.com">hth</a> 这样的链接，没有复杂的路径，它只是安静地等在那里。你可以把它看作一个索引，或者一张便签，上面写着你曾留意过的内容。 
+        </p>
+        <!-- 特点列表，温和呈现 -->
+        <ul class="feature-list">
+            <li>简洁的入口，不带多余修饰，适合反复访问</li>
+            <li>日常查询场景：术语对照、版本追溯、快速验证</li>
+            <li>延伸阅读的土壤——一个页面可能带出三五个后续方向</li>
+            <li>不追踪、不诱导，把选择的自由留在你手里</li>
+            <li>适应不同设备，从桌面笔记到手机备忘录都能打开</li>
+        </ul>
+    </div>
+
+    <!-- 场景与提示，穿插卡片 -->
+    <div class="card">
+        <h2>一些可以装进日常的场景</h2>
+        <p>
+            你在读一篇文档，里面出现一个不熟悉的概念。或者整理笔记时，想确认之前记下的代号是否正确。又或者只是和朋友聊起某个工具，想快速打开看一眼基本介绍。这些时刻，一个可靠、轻盈的链接比一次全局搜索更省力。
+        </p>
+        <p>
+            把 <a href="https://get-hth.com">hth</a> 放在笔记、收藏夹或备忘录里，它不会干扰你，但当你需要的时候，它就在那里。
+        </p>
+        <div class="note">
+            <strong>一个习惯</strong>：不必在每次打开时都预期什么。有时候只是让页面加载完，扫一眼就关闭——那也是一种确认。真正的延伸阅读，往往发生在你不太着急的时候。
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 (简洁、不喧宾夺主) -->
+    <div class="card">
+        <h2>偶尔有人会问起</h2>
+        <div class="faq-mini">
+            <details>
+                <summary>这个链接指向什么？</summary>
+                <div class="answer">
+                    一个起始页。它不定义内容，而是提供一个安静的入口。你可以把它当作一个中继点，用于日常查询或对照。
+                </div>
+            </details>
+            <details>
+                <summary>我需要记住它吗？</summary>
+                <div class="answer">
+                    不需要特意记。把它放在常用工具里，或者当作书签栏的一个普通条目。需要的时候自然会想起它。
+                </div>
+            </details>
+            <details>
+                <summary>为什么是“hth”？</summary>
+                <div class="answer">
+                    只是一个简短的标识，便于输入和分享。没有复杂的含义，用起来轻松就好。
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-footer">
+        <span>一个日常访问点 · <a href="https://get-hth.com">hth</a></span><br>
+        <span style="font-size:0.85rem; display:inline-block; margin-top:0.5rem; opacity:0.7;">偶尔需要，始终在</span>
+    </div>
+</div>
+</body>
+</html>
